@@ -4,39 +4,16 @@
 <head>
     <title>List Employees</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous" />
+<!--    <link rel="stylesheet"-->
+<!--          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"-->
+<!--          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"-->
+<!--          crossorigin="anonymous" />-->
 
-    <script th:inline="javascript">
-        function deleteSelectedRows() {
-            var selectedRows = document.querySelectorAll('tr.selected');
-            selectedRows.forEach(function(row) {
-                row.remove();
-            });
-        }
-        function markAsSelected(rowId, coffeeId) {
-            var row = document.getElementById(rowId);
-            if (row) {
-                if (row.style.backgroundColor === 'lightgrey') {
-                    row.style.backgroundColor = '';
-                } else {
-                    row.style.backgroundColor = 'lightgrey';
-                }
-            }
-        }
-    </script>
 
 </head>
 
 <body>
 <div class="container">
-    <h3>List Employees</h3>
-    <div>
-        <button onclick="deleteSelectedRows()">Delete Selected Rows</button>
-    </div>
-    <hr/>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -45,12 +22,50 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="coffee: ${coffees}" th:id="${'row-' + coffee.id}" th:onclick="'markAsSelected(\'' + 'row-' + ${coffee.id} + '\', \'' + ${coffee.id} + '\')'">
+        <tr th:each="coffee: ${coffees}" th:data-id="${coffee.id}">
             <td th:text="${coffee.id}" />
             <td th:text="${coffee.name}" />
         </tr>
         </tbody>
     </table>
+    <button id="deleteButton" class="btn btn-danger">Удалить</button>
 </div>
+
+<style>
+    .selected {
+        background-color: #2766D1; /* Любой цвет, указывающий на выбор элемента */
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('tr').click(function() {
+            $(this).toggleClass('selected');
+        });
+
+        $('#deleteButton').click(function() {
+            const ids = [];
+            $('.selected').each(function() {
+                ids.push($(this).data('id'));
+            });
+
+            $.ajax({
+                url: '/delete-rows',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(ids),
+                success: function(response) {
+                    alert('Записи успешно удалены');
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Произошла ошибка при удалении записей');
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
