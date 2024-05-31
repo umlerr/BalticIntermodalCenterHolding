@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    import "tablestyle.css";
-    import "add.css";
     $('#openModalButton').on('click', function() {
         $('#modal').show();
     });

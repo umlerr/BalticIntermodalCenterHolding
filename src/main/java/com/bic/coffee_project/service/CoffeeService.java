@@ -5,6 +5,7 @@ import com.bic.coffee_project.model.Coffee;
 import com.bic.coffee_project.repository.CoffeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @AllArgsConstructor
@@ -23,6 +24,11 @@ public class CoffeeService {
 
     public void delete(int id) {
         coffeeRepository.deleteById(String.valueOf(id));
+    }
+
+
+    public void updateOrInsert(Coffee coffee) {
+        coffeeRepository.updateOrInsert(coffee);
     }
 
 }

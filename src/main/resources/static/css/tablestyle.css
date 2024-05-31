@@ -1,0 +1,38 @@
+.table-container {
+    width: 800px; /* Ширина контейнера таблицы */
+    height: 500px; /* Высота контейнера таблицы */
+    overflow: auto; /* Добавляем полосу прокрутки при необходимости */
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Расположить сверху на 50% */
+    left: 50%; /* Расположить слева на 50% */
+    transform: translate(-50%, -50%); /* Центрирование по центру */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    width: 100%; /* Ширина таблицы на всю ширину контейнера */
+    table-layout: fixed; /* Фиксированная ширина ячеек таблицы */
+}
+
+.selected {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-striped tbody tr.selected:nth-of-type(odd):not(.table-header) {
+    background-color: #3498db;
+    color: #fff;
+}
+
+tr:hover {
+    cursor: pointer;
+}

@@ -35,4 +35,10 @@ public class CoffeeController {
     public void addData(@RequestBody Coffee coffee) {
         coffeeService.add(coffee);
     }
+
+    @PostMapping("/update-row")
+    @ResponseBody
+    public void updateData(@RequestBody Coffee coffee) {
+        coffeeService.updateOrInsert(coffee);
+    }
 }

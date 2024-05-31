@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    import "tablestyle.css";
-    import "add.css";
     $('tr').click(function() {
         $(this).toggleClass('selected');
     });
