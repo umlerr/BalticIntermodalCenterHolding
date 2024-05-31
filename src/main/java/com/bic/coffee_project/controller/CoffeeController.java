@@ -24,9 +24,15 @@ public class CoffeeController {
     }
 
     @PostMapping("/delete-rows")
+    @ResponseBody
     public void deleteRows(@RequestBody List<Integer> ids) {
         for (Integer id : ids) {
             coffeeService.delete(id);
         }
+    }
+    @PostMapping("/add-data")
+    @ResponseBody
+    public void addData(@RequestBody Coffee coffee) {
+        coffeeService.add(coffee);
     }
 }

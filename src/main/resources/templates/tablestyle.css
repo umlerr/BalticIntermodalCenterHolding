@@ -1,12 +1,11 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
+.selected {
+    background-color: #3498db;
+    color: #fff;
 }
-th, td {
-    border: 1px solid #868686;
-    text-align: left;
-    padding: 8px;
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
 }
-th {
-    background-color: #dedede;
+.table-striped tbody tr.selected:nth-of-type(odd) {
+    background-color: #3498db;
+    color: #fff;
 }
