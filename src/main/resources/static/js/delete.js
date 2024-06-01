@@ -1,7 +1,29 @@
 $(document).ready(function() {
-    $('tr').click(function() {
-        $(this).toggleClass('selected');
+    let isCtrlPressed = false;
+
+    $(document).keydown(function(event) {
+        if (event.which === 17) { // Клавиша Ctrl
+            isCtrlPressed = true;
+        }
+    }).keyup(function(event) {
+        if (event.which === 17) {
+            isCtrlPressed = false;
+        }
     });
+
+    $('tr').click(function(event) {
+        if (!$(this).is(':first-child')) {
+            if (isCtrlPressed) {
+                $(this).toggleClass('selected');
+            } else {
+                if (!event.shiftKey) {
+                    $('.selected').removeClass('selected');
+                }
+                $(this).addClass('selected');
+            }
+        }
+    });
+
     $('#deleteButton').click(function() {
         const selectedRows = $('.selected');
 
@@ -26,5 +48,10 @@ $(document).ready(function() {
                 alert('Ошибка удаления. Попробуйте еще раз.');
             });
         }
+    });
+
+    // Предотвращаем выбор заголовка таблицы
+    $('th').click(function(event) {
+        event.stopPropagation();
     });
 });

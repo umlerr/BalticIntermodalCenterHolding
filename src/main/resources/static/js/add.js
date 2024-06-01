@@ -4,7 +4,7 @@ $(document).ready(function() {
     });
 
     $('#addButton').on('click', function() {
-        var name = $('#nameInput').val();
+        const name = $('#nameInput').val();
 
         if (name.trim() === '') {
             alert('Пожалуйста, введите имя');
