@@ -43,14 +43,8 @@ public class CoffeeController {
         coffeeService.updateOrInsert(coffee);
     }
 
-//    @GetMapping("/search")
-//    public String search(@RequestParam String keyword, Model model) {
-//        Iterable<Coffee> searchResults = coffeeService.searchByKeyword(keyword);
-//        model.addAttribute("searchResults", searchResults);
-//        return "search-results";
-//    }
-
     @GetMapping("/search")
+    @ResponseBody
     public ResponseEntity<Iterable<Coffee>> search(@RequestParam String keyword) {
         Iterable<Coffee> searchResults = coffeeService.searchByKeyword(keyword);
         return ResponseEntity.ok().body(searchResults);
