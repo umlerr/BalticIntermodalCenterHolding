@@ -6,6 +6,8 @@ import com.bic.project.repository.ContainerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @AllArgsConstructor
 @Service
@@ -23,6 +25,10 @@ public class ContainerService {
 
     public void delete(int id) {
         containerRepository.deleteById(String.valueOf(id));
+    }
+
+    public Optional<Container> getById(Integer id) {
+        return containerRepository.findById(String.valueOf(id));
     }
 
     public void updateOrInsert(Container container) {

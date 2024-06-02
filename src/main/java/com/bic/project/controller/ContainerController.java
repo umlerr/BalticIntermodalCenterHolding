@@ -1,5 +1,6 @@
 package com.bic.project.controller;
 
+
 import com.bic.project.model.Container;
 import com.bic.project.service.ContainerService;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -21,7 +24,20 @@ public class ContainerController {
     public String getAll(Model model) {
         Iterable<Container> taskList = containerService.getAll();
         model.addAttribute("containers", taskList);
-        return "containers";
+        return "main";
+    }
+
+    @GetMapping("/details/{id}")
+    public String getAll(@PathVariable Integer id, Model model) {
+        Optional<Container> containerOptional = containerService.getById(id);
+
+        if(containerOptional.isPresent()) {
+            Container container = containerOptional.get();
+            model.addAttribute("container", container);
+            return "details";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/delete-rows")

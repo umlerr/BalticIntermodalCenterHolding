@@ -31,7 +31,7 @@ public class Departure {
 
     private Integer Compensation;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "CIRCLE_ID")
     private Circle circle;
 }

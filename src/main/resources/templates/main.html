@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Containers</title>
+<link rel="stylesheet" href="/css/add.css">
+<link rel="stylesheet" href="/css/tablestyle.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div class="table-container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Circle</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="container: ${containers}" th:data-id="${container.id} " th:number="${container.number}">
+            <td th:text="${container.number}"></td>
+            <td th:text="${container.price}"></td>
+            <td th:text="${container.type}"></td>
+            <td th:text="${container.getMaxCircle()}"></td>
+            <td th:text="${container.getCurrentLocation()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <button id="deleteButton" class="btn btn-danger mb-2">Удалить</button>
+    <button id="editButton" class="btn btn-primary mb-2">Редактировать</button>
+    <button id="openModalButton" class="btn btn-success mb-2">Добавить</button>
+</div>
+
+<div class="search-container">
+    <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Поиск по имени...">
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <label for="nameInput"></label><input type="text" id="nameInput" placeholder="Введите имя">
+        <button id="addButton" class="btn btn-primary mb-2">Добавить</button>
+    </div>
+</div>
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="currentValue"> </div>
+        <label for="nameInputEdit">Изменить значение:</label>
+        <input type="text" id="nameInputEdit">
+        <button id="saveButton">Сохранить</button>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/add.js"></script>
+<script src="/js/delete.js"></script>
+<script src="/js/edit.js"></script>
+<script src="/js/search.js"></script>
+<script>
+    $(document).ready(function() {
+        $("tr").dblclick(function() {
+            var id = $(this).attr("data-id");
+            var number = $(this).attr("number")
+            window.location.href = "/details/" + id; //+ "/" + number;
+        });
+    });
+</script>
+</body>
+</html>

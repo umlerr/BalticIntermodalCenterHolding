@@ -4,6 +4,7 @@ import com.bic.project.model.Coffee;
 import com.bic.project.model.Container;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface ContainerRepository extends JpaRepository<Container, String> {
+public interface ContainerRepository extends CrudRepository<Container, String> {
     // удалить несколько записей о заказе на основе определенных критериев, таких как все заказы с определенным статусом
 //    @Transactional
 //    void deleteByName(String name);

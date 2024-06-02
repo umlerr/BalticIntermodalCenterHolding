@@ -29,6 +29,6 @@ public interface CircleRepository extends JpaRepository<Circle, String> {
             "or lower(c.field3) like %:keyword% ")
      */
 
-    @Query("select c from Circle c where lower(c.Number) like %:keyword% ")
-    List<Circle> searchByKeyword(@Param("keyword") String keyword);
+//    @Query("select c from Circle c where lower(c.Number) like %:keyword% ")
+//    List<Circle> searchByKeyword(@Param("keyword") String keyword);
 }

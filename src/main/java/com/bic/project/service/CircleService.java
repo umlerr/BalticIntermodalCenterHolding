@@ -29,8 +29,8 @@ public class CircleService {
         circleRepository.updateOrInsert(circle);
     }
 
-    public Iterable<Circle> searchByKeyword(String keyword) {
-        return circleRepository.searchByKeyword(keyword);
-    }
+//    public Iterable<Circle> searchByKeyword(String keyword) {
+//        return circleRepository.searchByKeyword(keyword);
+//    }
 
 }

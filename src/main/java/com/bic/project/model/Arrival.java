@@ -29,7 +29,7 @@ public class Arrival {
 
     private Integer Used_Days;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "CIRCLE_ID")
     private Circle circle;
 }

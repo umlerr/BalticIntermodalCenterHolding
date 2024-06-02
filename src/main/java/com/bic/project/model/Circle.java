@@ -26,11 +26,11 @@ public class Circle {
     @JoinColumn(name = "CONTAINER_ID")
     private Container container;
 
-    @OneToMany(mappedBy = "circle", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "circle", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Arrival> arrivalList = new ArrayList<>();
+    private Arrival arrival;
 
-    @OneToMany(mappedBy = "circle", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "circle", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Departure> departureList = new ArrayList<>();
+    private Departure departure;
 }

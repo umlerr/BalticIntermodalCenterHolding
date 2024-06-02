@@ -17,33 +17,33 @@ public class ArrivalController {
 
     private ArrivalService arrivalService;
 
-    @GetMapping("/")
+    @GetMapping("/arrival")
     public String getAll(Model model) {
         Iterable<Arrival> taskList = arrivalService.getAll();
         model.addAttribute("arrivals", taskList);
         return "arrivals";
     }
 
-    @PostMapping("/delete-rows")
+    @PostMapping("/arrival/delete-rows")
     @ResponseBody
     public void deleteRows(@RequestBody List<Integer> ids) {
         for (Integer id : ids) {
             arrivalService.delete(id);
         }
     }
-    @PostMapping("/add-data")
+    @PostMapping("/arrival/add-data")
     @ResponseBody
     public void addData(@RequestBody Arrival arrival) {
         arrivalService.add(arrival);
     }
 
-    @PostMapping("/update-row")
+    @PostMapping("/arrival/update-row")
     @ResponseBody
     public void updateData(@RequestBody Arrival arrival) {
         arrivalService.updateOrInsert(arrival);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/arrival/search")
     @ResponseBody
     public ResponseEntity<Iterable<Arrival>> search(@RequestParam String keyword) {
         Iterable<Arrival> searchResults = arrivalService.searchByKeyword(keyword);

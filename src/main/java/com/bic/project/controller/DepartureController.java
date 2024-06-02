@@ -17,33 +17,33 @@ public class DepartureController {
 
     private DepartureService departureService;
 
-    @GetMapping("/")
+    @GetMapping("/departure")
     public String getAll(Model model) {
         Iterable<Departure> taskList = departureService.getAll();
         model.addAttribute("departures", taskList);
         return "departures";
     }
 
-    @PostMapping("/delete-rows")
+    @PostMapping("/departure/delete-rows")
     @ResponseBody
     public void deleteRows(@RequestBody List<Integer> ids) {
         for (Integer id : ids) {
             departureService.delete(id);
         }
     }
-    @PostMapping("/add-data")
+    @PostMapping("/departure/add-data")
     @ResponseBody
     public void addData(@RequestBody Departure departure) {
         departureService.add(departure);
     }
 
-    @PostMapping("/update-row")
+    @PostMapping("/departure/update-row")
     @ResponseBody
     public void updateData(@RequestBody Departure departure) {
         departureService.updateOrInsert(departure);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/departure/search")
     @ResponseBody
     public ResponseEntity<Iterable<Departure>> search(@RequestParam String keyword) {
         Iterable<Departure> searchResults = departureService.searchByKeyword(keyword);
