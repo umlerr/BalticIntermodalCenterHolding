@@ -1,6 +1,7 @@
-package com.bic.coffee_project.repository;
+package com.bic.project.repository;
 
-import com.bic.coffee_project.model.Coffee;
+import com.bic.project.model.Coffee;
+import com.bic.project.model.Container;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,14 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface CoffeeRepository extends JpaRepository<Coffee, String> {
-
+public interface ContainerRepository extends JpaRepository<Container, String> {
     // удалить несколько записей о заказе на основе определенных критериев, таких как все заказы с определенным статусом
 //    @Transactional
 //    void deleteByName(String name);
     @Transactional
-    default void updateOrInsert(Coffee coffee) {
-        save(coffee);
+    default void updateOrInsert(Container container) {
+        save(container);
     }
 
 
@@ -29,6 +29,6 @@ public interface CoffeeRepository extends JpaRepository<Coffee, String> {
             "or lower(c.field3) like %:keyword% ")
      */
 
-    @Query("select c from Coffee c where lower(c.Name) like %:keyword% ")
-    List<Coffee> searchByKeyword(@Param("keyword") String keyword);
+    @Query("select c from Container c where lower(c.Number) like %:keyword% ")
+    List<Container> searchByKeyword(@Param("keyword") String keyword);
 }

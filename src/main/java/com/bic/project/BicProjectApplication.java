@@ -1,4 +1,4 @@
-package com.bic.coffee_project;
+package com.bic.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package com.bic.coffee_project.controller;
+package com.bic.project.controller;
 
-import com.bic.coffee_project.model.Coffee;
-import com.bic.coffee_project.service.CoffeeService;
+import com.bic.project.model.Coffee;
+import com.bic.project.service.CoffeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

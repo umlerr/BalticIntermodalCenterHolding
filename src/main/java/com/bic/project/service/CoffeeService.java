@@ -1,8 +1,8 @@
-package com.bic.coffee_project.service;
+package com.bic.project.service;
 
 
-import com.bic.coffee_project.model.Coffee;
-import com.bic.coffee_project.repository.CoffeeRepository;
+import com.bic.project.model.Coffee;
+import com.bic.project.repository.CoffeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

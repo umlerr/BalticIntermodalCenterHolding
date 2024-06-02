@@ -1,4 +1,4 @@
-package com.bic.coffee_project.model;
+package com.bic.project.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "COFFEE")
 public class Coffee {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
     private String Name;
