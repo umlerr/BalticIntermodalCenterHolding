@@ -23,10 +23,10 @@
             </tr>
         </thead>
         <tbody>
-        <tr th:each="container: ${containers}" th:data-id="${container.id} " th:number="${container.number}">
-            <td th:text="${container.number}"></td>
-            <td th:text="${container.price}"></td>
-            <td th:text="${container.type}"></td>
+        <tr th:each="container: ${containers}" th:data-id="${container.getId()} " th:number="${container.getMaxCircle()}">
+            <td th:text="${container.getNumber()}"></td>
+            <td th:text="${container.getPrice()}"></td>
+            <td th:text="${container.getType()}"></td>
             <td th:text="${container.getMaxCircle()}"></td>
             <td th:text="${container.getCurrentLocation()}"></td>
         </tr>
@@ -72,7 +72,7 @@
         $("tr").dblclick(function() {
             var id = $(this).attr("data-id");
             var number = $(this).attr("number")
-            window.location.href = "/details/" + id; //+ "/" + number;
+            window.location.href = "/details/" + id + "/" + number; //+ "/" + number;
         });
     });
 </script>

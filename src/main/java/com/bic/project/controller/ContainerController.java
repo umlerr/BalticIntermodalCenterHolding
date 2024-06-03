@@ -1,7 +1,9 @@
 package com.bic.project.controller;
 
 
+import com.bic.project.model.Circle;
 import com.bic.project.model.Container;
+import com.bic.project.service.CircleService;
 import com.bic.project.service.ContainerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class ContainerController {
 
     private ContainerService containerService;
+    private CircleService circleService;
 
     @GetMapping("/")
     public String getAll(Model model) {
@@ -27,17 +30,33 @@ public class ContainerController {
         return "main";
     }
 
-    @GetMapping("/details/{id}")
-    public String getCurrContainer(@PathVariable Integer id, Model model) {
+//    @GetMapping("/details/{id}")
+//    public String getCurrContainer(@PathVariable Integer id, Model model) {
+//        Optional<Container> containerOptional = containerService.getById(id);
+//
+//        if(containerOptional.isPresent()) {
+//            Container container = containerOptional.get();
+//            model.addAttribute("container", container);
+//            return "details";
+//        } else {
+//            return "redirect:/";
+//        }
+//    }
+
+    @GetMapping("/details/{id}/{circle_number}")
+    public String getCurrCircle(@PathVariable Integer id, @PathVariable Integer circle_number, Model model) {
         Optional<Container> containerOptional = containerService.getById(id);
 
         if(containerOptional.isPresent()) {
             Container container = containerOptional.get();
+            System.out.println(container.getId());
             model.addAttribute("container", container);
+            Circle circle = container.getCircleByNumber(circle_number);
+            System.out.println(circle.getNumber());
+            model.addAttribute("circle", circle);
             return "details";
-        } else {
-            return "redirect:/";
         }
+        return "redirect:/";
     }
 
     @PostMapping("/delete-rows")

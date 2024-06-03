@@ -1,6 +1,6 @@
 package com.bic.project.repository;
 
-import com.bic.project.model.Coffee;
+
 import com.bic.project.model.Container;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

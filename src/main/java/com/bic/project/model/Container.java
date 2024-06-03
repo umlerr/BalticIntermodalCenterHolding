@@ -44,13 +44,12 @@ public class Container {
     }
 
     public Circle getCircleByNumber(Integer currNumber) {
-        Circle currCircle = null;
-        Integer number;
         for (Circle circle : this.circleList) {
-            number = circle.getNumber();
-            currCircle = Objects.equals(currNumber, number) ? circle : null;
+            if (Objects.equals(currNumber, circle.getNumber())){
+                return circle;
+            }
         }
-        return currCircle;
+        return null;
     }
 
     public String getCurrentLocation() {
@@ -97,6 +96,10 @@ public class Container {
                 return departure.getPickup_Date();
             }
         }
+    }
+
+    public Integer getCircleDeparture(Integer inte){
+        return inte;
     }
 }
 

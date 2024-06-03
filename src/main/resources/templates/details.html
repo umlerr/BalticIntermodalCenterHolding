@@ -6,85 +6,268 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Site</title>
-
-    <link rel="stylesheet" href="/css/details.css">
-
 </head>
 
-<body>
-<div class="header">
-    <img src="/icons/logo.png" alt="Logo" style="width: 100px;">
-    <a href="/" style="color: white; text-decoration: none;">На главную</a>
-</div>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
 
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        position: relative;
+        font-family: 'Montserrat', sans-serif; /* Добавляем резервный шрифт */
+    }
+    .Rectangle3 {
+        width: 1027px;
+        height: 625.69px;
+        left: 126px;
+        top: 158px;
+        position: absolute;
+        background: #EFEFEF;
+        box-shadow: 2.1575629711151123px 2.1575629711151123px 4.315125942230225px rgba(0, 0, 0, 0.25);
+        border-radius: 21.58px;
+        transition: height 0.3s;
+    }
 
-<div class="main">
-    <div class="workspace-header">
+    .Rectangle4 {
+        width: 925px;
+        height: 541px;
+        left: 177px;
+        top: 200px;
+        position: absolute;
+        background: #979797;
+        border-radius: 21.58px;
+        transition: height 0.3s;
+    }
 
-        <span id="containerNumber" th:text="${container.number}"></span>
-        <span id="currLocation" th:text="${container.getCurrentLocation()}"></span>
-        <span id="currDate" th:text="${container.getCurrentDate()}"></span>
+    .ellipse-container {
+        position: absolute;
+        left: 250px;
+        top: 325px;
+    }
 
-        <span id="maxCircle"  style="display: none;" th:text="${container.getMaxCircle()}"></span>
+    .SubPoints {
+        width: 52.86px;
+        height: 52.86px;
+        background: #D9D9D9;
+        border-radius: 9999px;
+        position: relative;
+        margin-bottom: 40px;
+        cursor: pointer;
+    }
 
-        <button id="prevCircleButton" onclick="goToPreviousCircle()">←</button>
-        <span id="circleNumber"></span>
-        <button id="nextCircleButton" onclick="goToNextCircle()">→</button>
+    .EndPoints {
+        width: 52.86px;
+        height: 52.86px;
+        background: #D9D9D9;
+        border-radius: 9999px;
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .line {
+        width: 2px;
+        background: black;
+        position: absolute;
+        left: 25.43px;
+        top: 52.86px;
+        height: 40px;
+        pointer-events: none;
+    }
+
+    .label {
+        position: absolute;
+        left: 80px;
+        top: 5px;
+        font-size: 24px;
+        color: black;
+    }
+
+    .label2 {
+        position: absolute;
+        left: 80px;
+        top: 50px;
+        font-size: 18px;
+        color: #47e8e8;
+        white-space: nowrap;
+        width: auto; /* Автоматическая ширина */
+    }
+
+    .sub-list {
+        display: none;
+        margin-top: 30px;
+    }
+
+    .sub-ellipse {
+        width: 25px;
+        height: 25px;
+        background: #D9D9D9;
+        border-radius: 50%;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sub-label {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="MacbookAir1" style="width: 1280px; height: 832px; position: relative; background: white">
+    <div class="Rectangle1" style="width: 1280px; height: 102px; left: 0; top: 0; position: absolute; background: #EFEFEF"></div>
+
+    <div style="left: 596px; top: 27px; position: absolute; color: black; font-size: 40px; font-weight: 400; word-wrap: break-word">лого</div>
+    <div class="Group1" style="width: 214px; height: 59px; left: 346px; top: 22px; position: absolute">
+        <div class="Rectangle2" style="width: 214px; height: 59px; left: 0; top: 0; position: absolute; background: #14FF00; border-radius: 40px"></div>
+        <a href="/">
+            <div style="left: 41px; top: 15px; position: absolute; color: black; font-size: 24px; font-weight: 400; word-wrap: break-word">Главная</div>
+        </a>
     </div>
 
-    <div class="progress-bar"></div>
+    <div class="Rectangle3" style="width: 1027px; height: 625.69px; left: 126px; top: 158px; position: absolute; background: #EFEFEF; box-shadow: 2.1575629711151123px 2.1575629711151123px 4.315125942230225px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
+    <div class="Rectangle4" style="width: 925px; height: 541px; left: 177px; top: 200px; position: absolute; background: #979797; border-radius: 21.58px"></div>
 
-    <div id="buttonsContainer"></div>
-    <div id="tablesContainer"></div>
+    <div class="ellipse-container">
+        <div class="EndPoints">
+            <div class="label">Главная</div>
+            <div class="label2" th:text="${circle.getDeparture().getDelivery_Date()}"></div>
+            <div class="line" id="line1"></div>
+        </div>
 
+        <div class="SubPoints" onclick="toggleSubList(this)">
+            <div class="label">Элемент 2</div>
+            <div class="line" id="line2"></div>
+        </div>
+
+        <div class="sub-list">
+            <div class="sub-ellipse">
+                <div class="sub-label"></div>
+            </div>
+            <div class="sub-ellipse">
+                <div class="sub-label" th:text="${container.getNumber()}"></div>
+            </div>
+            <!-- Добавьте больше подпунктов по мере необходимости -->
+        </div>
+
+        <div class="SubPoints" onclick="toggleSubList(this)">
+            <div class="label">Элемент 3</div>
+            <div class="line" id="line3"></div>
+        </div>
+        <div class="sub-list">
+            <div class="sub-ellipse">
+                <div class="sub-label">Подпункт 1</div>
+            </div>
+            <div class="sub-ellipse">
+                <div class="sub-label">Подпункт 2</div>
+            </div>
+            <!-- Добавьте больше подпунктов по мере необходимости -->
+        </div>
+
+        <div class="EndPoints">
+            <div class="label">Элемент 4</div>
+        </div>
+    </div>
+
+
+    <span id="containerNumber" th:text="${container.number}" style="left: 222.01px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
+
+    <span id="Location" style="left: 502.49px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
+    <span id="Date" style="left: 645.97px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
+
+    <div class="Line1" style="width: 875.97px; height: 0; left: 205.83px; top: 283.14px; position: absolute; border: 1.08px white dotted"></div>
+
+    <span id="currLocation" style="display: none;" th:text="${container.getCurrentLocation()}"></span>
+    <span id="currDate" style="display: none;" th:text="${container.getCurrentDate()}"></span>
+    <span id="maxCircle"  style="display: none;" th:text="${container.getMaxCircle()}"></span>
+    <span id="currCircle"  style="display: none;" th:text="${circle.getNumber()}"></span>
+    <span id="containerId"  style="display: none;" th:text="${container.getId()}"></span>
+
+    <button id="prevCircleButton" onclick="goToPreviousCircle()" style="width: 28.05px; height: 28.05px; left: 890.86px; top: 233.51px; position: absolute; background: #D9D9D9">←</button>
+    <span id="circleNumber" style="left: 931.85px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
+    <button id="nextCircleButton" onclick="goToNextCircle()" style="width: 28.05px; height: 28.05px; left: 1041.89px; top: 233.51px; position: absolute; background: #D9D9D9">→</button>
 </div>
-</body>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#prevCircleButton").click(function() {
+            var circleNumber = parseInt($("#circleNumber").text());
+            redirectToDetailsPage(circleNumber - 1, "prev");
+        });
+
+        $("#nextCircleButton").click(function() {
+            var circleNumber = parseInt($("#circleNumber").text());
+            redirectToDetailsPage(circleNumber + 1, "next");
+        });
+
+        function redirectToDetailsPage(circleNumber) {
+            let id = document.getElementById('containerId').innerHTML;
+            window.location.href = "/details/" + id + "/" + circleNumber;
+        }
+    });
+</script>
 
 <script th:inline="javascript">
     let maxCircle = parseInt(document.getElementById("maxCircle").innerHTML);
 
-    let currentCircle = maxCircle;
+    let currentCircle = parseInt(document.getElementById("currCircle").innerHTML);
 
     updateCircleNumber(currentCircle);
 
     function updateCircleNumber(circle) {
-        document.getElementById('circleNumber').textContent = "Круг " + circle;
+        document.getElementById('circleNumber').textContent = circle;
         currentCircle = circle;
-
         let containerNumber = document.getElementById('containerNumber').innerHTML;
+
         let currLocation = document.getElementById('currLocation').innerHTML;
         let currDate = document.getElementById('currDate').innerHTML;
+
+        if (currentCircle < maxCircle){
+            document.getElementById('Location').textContent = 'Пройдено';
+            document.getElementById('Date').textContent = '';
+        }
+        else {
+            document.getElementById('Location').textContent = currLocation;
+            document.getElementById('Date').textContent = currDate;
+        }
+
         document.getElementById('containerNumber').textContent = containerNumber;
-        document.getElementById('currLocation').textContent = currLocation;
-        document.getElementById('currDate').textContent = currDate;
 
         checkButtonsState();
     }
 
-    function goToPreviousCircle() {
-        if (currentCircle > 1) {
-            updateCircleNumber(currentCircle - 1);
-        }
-    }
-
-    function goToNextCircle() {
-        if (currentCircle < maxCircle) {
-            updateCircleNumber(currentCircle + 1);
-        }
-    }
-
     function checkButtonsState() {
-        if (currentCircle <= 1) {
+        if (currentCircle === 1) {
             document.getElementById('prevCircleButton').disabled = true;
-            document.getElementById('nextCircleButton').disabled = false;
-        } else if (currentCircle >= maxCircle) {
-            document.getElementById('prevCircleButton').disabled = false;
-            document.getElementById('nextCircleButton').disabled = true;
+            document.getElementById('nextCircleButton').disabled = currentCircle === maxCircle;
         } else {
             document.getElementById('prevCircleButton').disabled = false;
-            document.getElementById('nextCircleButton').disabled = false;
+            document.getElementById('nextCircleButton').disabled = currentCircle >= maxCircle;
+        }
+    }
+</script>
+<script>
+    function toggleSubList(element) {
+        const subList = $(element).next();
+        const rect3 = $('.Rectangle3');
+        const rect4 = $('.Rectangle4');
+        const subListHeight = subList.outerHeight(true);
+        const line = $(element).find('.line'); // Находим линию внутри элемента
+
+        if (subList.is(':hidden')) {
+            subList.show();
+            rect3.css('height', parseInt(rect3.height()) + subListHeight + 'px');
+            rect4.css('height', parseInt(rect4.height()) + subListHeight + 'px');
+            line.css('height', parseInt(line.height()) + subListHeight + 'px');
+        } else {
+            subList.hide();
+            rect3.css('height', parseInt(rect3.height()) - subListHeight - 20 + 'px');
+            rect4.css('height', parseInt(rect4.height()) - subListHeight - 20 + 'px');
+            line.css('height', parseInt(line.height()) - subListHeight - 20 + 'px');
         }
     }
 </script>

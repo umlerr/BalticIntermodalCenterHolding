@@ -2,9 +2,12 @@ package com.bic.project.service;
 
 
 import com.bic.project.model.Circle;
+import com.bic.project.model.Container;
 import com.bic.project.repository.CircleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -32,5 +35,8 @@ public class CircleService {
 //    public Iterable<Circle> searchByKeyword(String keyword) {
 //        return circleRepository.searchByKeyword(keyword);
 //    }
+    public Optional<Circle> getById(Integer id) {
+        return circleRepository.findById(String.valueOf(id));
+    }
 
 }
