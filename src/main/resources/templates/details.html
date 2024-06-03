@@ -137,14 +137,19 @@
             <div class="line" id="line1"></div>
         </div>
 
+        <span id="delivery_date"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Date()}"></span>
+        <span id="china_location"  style="display: none;" th:text="${circle.getDeparture().getChina_Location()}"></span>
+        <span id="pickup_date"  style="display: none;" th:text="${circle.getDeparture().getPickup_Date()}"></span>
+        <span id="delivery_location"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Location()}"></span>
+
         <div class="SubPoints" onclick="toggleSubList(this)">
-            <div class="label">Элемент 2</div>
+            <div class="label">Отправка</div>
             <div class="line" id="line2"></div>
         </div>
 
         <div class="sub-list">
             <div class="sub-ellipse">
-                <div class="sub-label"></div>
+                <div class="sub-label" ></div>
             </div>
             <div class="sub-ellipse">
                 <div class="sub-label" th:text="${container.getNumber()}"></div>
@@ -153,15 +158,15 @@
         </div>
 
         <div class="SubPoints" onclick="toggleSubList(this)">
-            <div class="label">Элемент 3</div>
+            <div class="label">Прибытие</div>
             <div class="line" id="line3"></div>
         </div>
         <div class="sub-list">
             <div class="sub-ellipse">
-                <div class="sub-label">Подпункт 1</div>
+                <div class="sub-label" ></div>
             </div>
             <div class="sub-ellipse">
-                <div class="sub-label">Подпункт 2</div>
+                <div class="sub-label" ></div>
             </div>
             <!-- Добавьте больше подпунктов по мере необходимости -->
         </div>
@@ -190,6 +195,32 @@
     <button id="nextCircleButton" onclick="goToNextCircle()" style="width: 28.05px; height: 28.05px; left: 1041.89px; top: 233.51px; position: absolute; background: #D9D9D9">→</button>
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var flag = false;
+
+        function checkFields() {
+            $.each(data, function(key, value) {
+                var subLabel = $("<div>").addClass("sub-label");
+
+                if (value === "") {
+                    subLabel.text("Пустое значение");
+                    flag = true;
+                } else {
+                    subLabel.text(value);
+                }
+
+                $(".sub-list").append(
+                    $("<div>").addClass("sub-ellipse").append(subLabel)
+                );
+            });
+            console.log("Flag: ", flag);
+        }
+        checkFields();
+    });
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
