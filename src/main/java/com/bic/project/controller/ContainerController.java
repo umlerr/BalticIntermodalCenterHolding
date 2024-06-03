@@ -28,7 +28,7 @@ public class ContainerController {
     }
 
     @GetMapping("/details/{id}")
-    public String getAll(@PathVariable Integer id, Model model) {
+    public String getCurrContainer(@PathVariable Integer id, Model model) {
         Optional<Container> containerOptional = containerService.getById(id);
 
         if(containerOptional.isPresent()) {

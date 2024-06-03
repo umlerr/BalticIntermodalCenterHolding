@@ -1,0 +1,52 @@
+.body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.main {
+    background-color: #f0f0f0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.workspace-header {
+    background-color: #444;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 20px;
+    background-color: #00cc66;
+    /* Этот цвет может изменяться программно */
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}

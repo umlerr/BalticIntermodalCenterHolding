@@ -75,34 +75,28 @@ public class Container {
             }
         }
     }
-//    public String getCurrentLocation() {
-//        Integer currCircle = getMaxCircle();
-//        Circle circle = getCircleByNumber(currCircle);
-//        Arrival arrival = circle.getArrival();
-//        Departure departure = circle.getDeparture();
-//        if (arrival != null) {
-//            if (arrival.getCheckpoint_Date() == null) {
-//                if (arrival.getRussia_Delivery_Date() == null) {
-//                    return null;
-//                } else {
-//                    return arrival.getStock();
-//                }
-//            } else {
-//                return "КП + Направление: " + arrival.getDirection();
-//            }
-//        } else {
-//            if (departure.getPickup_Date() == null) {
-//                if (departure.getDelivery_Date() == null) {
-//                    return null;
-//                }
-//                else {
-//                    return departure.getChina_Location();
-//                }
-//            }
-//            else {
-//                return departure.getDelivery_Location();
-//            }
-//        }
-//    }
+
+    public Date getCurrentDate() {
+        Integer currCircle = getMaxCircle();
+        Circle circle = getCircleByNumber(currCircle);
+        if (circle == null) {
+            return null;
+        }
+        Arrival arrival = circle.getArrival();
+        Departure departure = circle.getDeparture();
+        if (arrival != null) {
+            if (arrival.getCheckpoint_Date() == null) {
+                return arrival.getRussia_Delivery_Date() == null ? null : arrival.getRussia_Delivery_Date();
+            } else {
+                return arrival.getCheckpoint_Date();
+            }
+        } else {
+            if (departure.getPickup_Date() == null) {
+                return departure.getDelivery_Date() == null ? null : departure.getDelivery_Date();
+            } else {
+                return departure.getPickup_Date();
+            }
+        }
+    }
 }
 

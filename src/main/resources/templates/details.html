@@ -6,60 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Site</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
 
-        .header {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
+    <link rel="stylesheet" href="/css/details.css">
 
-        .main {
-            background-color: #f0f0f0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-        }
-
-        .workspace-header {
-            background-color: #444;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            width: 50%;
-            margin-top: 20px;
-        }
-
-        .progress-bar {
-            width: 80%;
-            height: 20px;
-            background-color: #00cc66;
-            /* Этот цвет может изменяться программно */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
 </head>
 
 <body>
@@ -68,31 +17,76 @@
     <a href="/" style="color: white; text-decoration: none;">На главную</a>
 </div>
 
+
 <div class="main">
     <div class="workspace-header">
-        <span>Номер объекта</span>
-        <span>Какое-то место + Дата</span>
-        <span>Номер объекта</span>
+
+        <span id="containerNumber" th:text="${container.number}"></span>
+        <span id="currLocation" th:text="${container.getCurrentLocation()}"></span>
+        <span id="currDate" th:text="${container.getCurrentDate()}"></span>
+
+        <span id="maxCircle"  style="display: none;" th:text="${container.getMaxCircle()}"></span>
+
+        <button id="prevCircleButton" onclick="goToPreviousCircle()">←</button>
+        <span id="circleNumber"></span>
+        <button id="nextCircleButton" onclick="goToNextCircle()">→</button>
     </div>
 
     <div class="progress-bar"></div>
 
-    <table>
-        <tr>
-            <th>OR date stock</th>
-            <th>Pickup Stok N° / коментариус</th>
-            <th>RED</th>
-            <th>In</th>
-        </tr>
-        <tr>
-            <td th:text="${container.number}"></td>
-            <td>Данные</td>
-            <td>Данные</td>
-            <td>Данные</td>
-        </tr>
-        <!-- Добавьте дополнительные строки, если нужно -->
-    </table>
+    <div id="buttonsContainer"></div>
+    <div id="tablesContainer"></div>
+
 </div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script th:inline="javascript">
+    let maxCircle = parseInt(document.getElementById("maxCircle").innerHTML);
+
+    let currentCircle = maxCircle;
+
+    updateCircleNumber(currentCircle);
+
+    function updateCircleNumber(circle) {
+        document.getElementById('circleNumber').textContent = "Круг " + circle;
+        currentCircle = circle;
+
+        let containerNumber = document.getElementById('containerNumber').innerHTML;
+        let currLocation = document.getElementById('currLocation').innerHTML;
+        let currDate = document.getElementById('currDate').innerHTML;
+        document.getElementById('containerNumber').textContent = containerNumber;
+        document.getElementById('currLocation').textContent = currLocation;
+        document.getElementById('currDate').textContent = currDate;
+
+        checkButtonsState();
+    }
+
+    function goToPreviousCircle() {
+        if (currentCircle > 1) {
+            updateCircleNumber(currentCircle - 1);
+        }
+    }
+
+    function goToNextCircle() {
+        if (currentCircle < maxCircle) {
+            updateCircleNumber(currentCircle + 1);
+        }
+    }
+
+    function checkButtonsState() {
+        if (currentCircle <= 1) {
+            document.getElementById('prevCircleButton').disabled = true;
+            document.getElementById('nextCircleButton').disabled = false;
+        } else if (currentCircle >= maxCircle) {
+            document.getElementById('prevCircleButton').disabled = false;
+            document.getElementById('nextCircleButton').disabled = true;
+        } else {
+            document.getElementById('prevCircleButton').disabled = false;
+            document.getElementById('nextCircleButton').disabled = false;
+        }
+    }
+</script>
 
 </html>
