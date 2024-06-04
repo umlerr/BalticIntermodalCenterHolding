@@ -27,7 +27,7 @@ public class ContainerController {
     public String getAll(Model model) {
         Iterable<Container> taskList = containerService.getAll();
         model.addAttribute("containers", taskList);
-        return "main";
+        return "main_test";
     }
 
 //    @GetMapping("/details/{id}")
@@ -52,7 +52,7 @@ public class ContainerController {
             model.addAttribute("container", container);
             Circle circle = container.getCircleByNumber(circle_number);
             model.addAttribute("circle", circle);
-            return "details";
+            return "test";
         }
         return "redirect:/";
     }

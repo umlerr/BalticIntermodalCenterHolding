@@ -11,88 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-        position: relative;
-        font-family: 'Montserrat', sans-serif; /* Добавляем резервный шрифт */
-    }
-    .Rectangle3 {
-        width: 1027px;
-        height: 625.69px;
-        left: 126px;
-        top: 158px;
-        position: absolute;
-        background: #EFEFEF;
-        box-shadow: 2.1575629711151123px 2.1575629711151123px 4.315125942230225px rgba(0, 0, 0, 0.25);
-        border-radius: 21.58px;
-        transition: height 0.3s;
-    }
-
-    .Rectangle4 {
-        width: 925px;
-        height: 541px;
-        left: 177px;
-        top: 200px;
-        position: absolute;
-        background: #979797;
-        border-radius: 21.58px;
-        transition: height 0.3s;
-    }
-
-    .ellipse-container {
-        position: absolute;
-        left: 250px;
-        top: 325px;
-    }
-
-    .SubPoints1, .SubPoints2 {
-        width: 52.86px;
-        height: 52.86px;
-        background: #D9D9D9;
-        border-radius: 9999px;
-        position: relative;
-        margin-bottom: 40px;
-        cursor: pointer;
-    }
-
-    .EndPoints {
-        width: 52.86px;
-        height: 52.86px;
-        background: #D9D9D9;
-        border-radius: 9999px;
-        position: relative;
-        margin-bottom: 40px;
-    }
-
-    .line {
-        width: 2px;
-        background: black;
-        position: absolute;
-        left: 25.43px;
-        top: 52.86px;
-        height: 40px;
-        pointer-events: none;
-    }
-
-    .label {
-        position: absolute;
-        left: 80px;
-        top: 5px;
-        font-size: 24px;
-        color: black;
-    }
-
-    .label2 {
-        position: absolute;
-        left: 80px;
-        top: 50px;
-        font-size: 18px;
-        color: #47e8e8;
-        white-space: nowrap;
-        width: auto; /* Автоматическая ширина */
-    }
 
     .sub-list {
         display: none;
@@ -104,15 +22,6 @@
         height: 25px;
         background: #D9D9D9;
         border-radius: 50%;
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .sub-label {
-        font-size: 18px;
-        margin-left: 10px;
     }
 
     .non-clickable {
@@ -123,62 +32,12 @@
 </style>
 
 <div class="MacbookAir1" style="width: 1280px; height: 832px; position: relative; background: white">
-    <div class="Rectangle1" style="width: 1280px; height: 102px; left: 0; top: 0; position: absolute; background: #EFEFEF"></div>
-
-    <div style="left: 596px; top: 27px; position: absolute; color: black; font-size: 40px; font-weight: 400; word-wrap: break-word">лого</div>
-    <div class="Group1" style="width: 214px; height: 59px; left: 346px; top: 22px; position: absolute">
-        <div class="Rectangle2" style="width: 214px; height: 59px; left: 0; top: 0; position: absolute; background: #14FF00; border-radius: 40px"></div>
-        <a href="/">
-            <div style="left: 41px; top: 15px; position: absolute; color: black; font-size: 24px; font-weight: 400; word-wrap: break-word">Главная</div>
-        </a>
-    </div>
 
     <div class="Rectangle3" style="width: 1027px; height: 625.69px; left: 126px; top: 158px; position: absolute; background: #EFEFEF; box-shadow: 2.1575629711151123px 2.1575629711151123px 4.315125942230225px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
     <div class="Rectangle4" style="width: 925px; height: 541px; left: 177px; top: 200px; position: absolute; background: #979797; border-radius: 21.58px">
-        <div th:if="${circle.getDeparture() != null}" style="left: 400.01px; top: 220px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
-            <span th:if="${circle.getDeparture().getAnnex() != null}"
-                  th:text="'Номер приложения: ' + ${circle.getDeparture().getAnnex()}"></span>
-            <span th:if="${circle.getDeparture().getAnnex() == null}"
-                  th:text="' '"> </span>
-        </div>
-
-        <div th:if="${circle.getDeparture() != null}" style="left: 700px; top: 220px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
-            <span th:if="${circle.getDeparture().getCompensation() != null}"
-                  th:text="'Компенсация: ' + ${circle.getDeparture().getCompensation()} + '$'"></span>
-            <span th:if="${circle.getDeparture().getCompensation() == null}"
-                  th:text="' '"> </span>
-        </div>
-
-        <div th:if="${circle.getArrival() != null}" style="left: 400.01px; top: 400px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
-            <span th:if="${circle.getArrival().getDamage_Repair()!= null}"
-                  th:text="'Дефект и решение по ремонту: ' + ${circle.getArrival().getDamage_Repair()}"></span>
-            <span th:if="${circle.getArrival().getDamage_Repair() == null}"
-                  th:text="' '"> </span>
-        </div>
-
-        <div th:if="${circle.getArrival() != null}" style="left: 800px; top: 400px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
-            <span th:if="${circle.getArrival().getUsed_Days() != null}"
-                  th:text="'Количество дней: ' + ${circle.getArrival().getUsed_Days()}"></span>
-            <span th:if="${circle.getArrival().getUsed_Days() == null}"
-                  th:text="' '"> </span>
-        </div>
-    </div>
-
-    <div class="ellipse-container">
-        <div class="EndPoints">
-            <div class="label">Главная</div>
-            <div class="label2" th:text="${circle.getDeparture().getDelivery_Date()}"></div>
-            <div class="line" id="line1"></div>
-        </div>
-
-        <span id="delivery_date"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Date()}"></span>
-        <span id="china_location"  style="display: none;" th:text="${circle.getDeparture().getChina_Location()}"></span>
-        <span id="pickup_date"  style="display: none;" th:text="${circle.getDeparture().getPickup_Date()}"></span>
-        <span id="delivery_location"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Location()}"></span>
 
         <div class="SubPoints1" onclick="toggleSubList(this)">
             <div class="label">Отправка</div>
-            <div class="line" id="line2"></div>
         </div>
 
 
@@ -186,56 +45,22 @@
             <div class="sub-ellipse">
                 <div class="sub-label">
 
-                    <span class="china-location" th:if="${circle.getDeparture().getChina_Location() != null}"
-                          th:text="${circle.getDeparture().getChina_Location()}"> </span>
-                    <span class="china-location" th:if="${circle.getDeparture().getChina_Location() == null}" th:text="'-'"> </span>
-                    <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() != null}"
-                          th:text="${circle.getDeparture().getDelivery_Date()}"> </span>
-                    <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() == null}" th:text="'-'"> </span>
-
                 </div>
             </div>
             <div class="sub-ellipse">
                 <div class="sub-label">
-                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() != null}"
-                              th:text="${circle.getDeparture().getDelivery_Location()}"> </span>
-                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() == null}"
-                              th:text="'-'"> </span>
-                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() != null}"
-                              th:text="${circle.getDeparture().getPickup_Date()}"> </span>
-                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() == null}"
-                              th:text="'-'"> </span>
                 </div>
             </div>
         </div>
 
         <div class="SubPoints2" onclick="toggleSubList(this)">
             <div class="label">Прибытие</div>
-            <div class="line" id="line3"></div>
         </div>
 
         <div class="sub-list" th:if="${circle.getArrival() != null}" style="display: none;">
             <div class="sub-ellipse">
-
-                    <span class="stock" th:if="${circle.getArrival().getStock() != null}"
-                          th:text="${circle.getArrival().getStock()}"> </span>
-                    <span class="stock" th:if="${circle.getArrival().getStock() == null}"
-                          th:text="'-'"> </span>
-                    <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() != null}"
-                          th:text="${circle.getArrival().getRussia_Delivery_Date()}"> </span>
-                    <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() == null}"
-                          th:text="'-'"> </span>
             </div>
             <div class="sub-ellipse">
-                    <span class="direction" th:if="${circle.getArrival().getDirection() != null}"
-                          th:text="${circle.getArrival().getDirection()}"> </span>
-                    <span class="direction" th:if="${circle.getArrival().getDirection() == null}"
-                          th:text="'-'"> </span>
-
-                    <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() != null}"
-                          th:text="${circle.getArrival().getCheckpoint_Date()}"> </span>
-                    <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() == null}"
-                          th:text="'-'"> </span>
 
             </div>
         </div>
@@ -243,89 +68,31 @@
         <div class="EndPoints">
             <div class="label">Элемент 4</div>
         </div>
+
+
+        <div class="Group4" style="width: 290px; height: 42px; left: 46px; top: 249px; position: absolute">
+            <div class="SubPoints1" onclick="toggleSubList(this)" style="cursor: pointer; width: 74px; height: 42px; left: 0px; top: 255px; position: absolute; background: #F5CB5C; border-radius: 25px"></div>
+            <div class="sub-list" th:if="${circle.getDeparture() != null}" style="display: none;">
+                <div class="sub-points">
+                </div>
+                <div class="sub-points">
+                </div>
+            </div>
+            <div class="Group6" style="width: 290px; height: 42px;">
+                <div class="Rectangle12" style="width: 290px; height: 42px;position: absolute; background: #E8EDDF; border-radius: 25px"></div>
+                <div class="Rectangle7" style="width: 74px; height: 42px; position: absolute; background: #F5CB5C; border-radius: 25px"></div>
+                <div style="position: absolute; color: #333533; font-size: 23px;   font-weight: 400; text-transform: uppercase; letter-spacing: 0.46px; word-wrap: break-word">Конец</div>
+            </div>
+        </div>
+
     </div>
 
-
-    <span id="containerNumber" th:text="${container.number}" style="left: 222.01px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
-
-    <span id="Location" style="left: 502.49px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
-    <span id="Date" style="left: 645.97px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
-
-    <div class="Line1" style="width: 875.97px; height: 0; left: 205.83px; top: 283.14px; position: absolute; border: 1.08px white dotted"></div>
-
-    <span id="currLocation" style="display: none;" th:text="${container.getCurrentLocation()}"></span>
-    <span id="currDate" style="display: none;" th:text="${container.getCurrentDate()}"></span>
-    <span id="maxCircle"  style="display: none;" th:text="${container.getMaxCircle()}"></span>
-    <span id="currCircle"  style="display: none;" th:text="${circle.getNumber()}"></span>
-    <span id="containerId"  style="display: none;" th:text="${container.getId()}"></span>
-
-    <button id="prevCircleButton" onclick="goToPreviousCircle()" style="width: 28.05px; height: 28.05px; left: 890.86px; top: 233.51px; position: absolute; background: #D9D9D9">←</button>
-    <span id="circleNumber" style="left: 931.85px; top: 228.12px; position: absolute; color: black; font-size: 28.05px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word"></span>
-    <button id="nextCircleButton" onclick="goToNextCircle()" style="width: 28.05px; height: 28.05px; left: 1041.89px; top: 233.51px; position: absolute; background: #D9D9D9">→</button>
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#prevCircleButton").click(function() {
-            const circleNumber = parseInt($("#circleNumber").text());
-            redirectToDetailsPage(circleNumber - 1, "prev");
-        });
 
-        $("#nextCircleButton").click(function() {
-            const circleNumber = parseInt($("#circleNumber").text());
-            redirectToDetailsPage(circleNumber + 1, "next");
-        });
-
-        function redirectToDetailsPage(circleNumber) {
-            let id = document.getElementById('containerId').innerHTML;
-            window.location.href = "/details/" + id + "/" + circleNumber;
-        }
-    });
-</script>
-
-<script th:inline="javascript">
-    let maxCircle = parseInt(document.getElementById("maxCircle").innerHTML);
-
-    let currentCircle = parseInt(document.getElementById("currCircle").innerHTML);
-
-    updateCircleNumber(currentCircle);
-
-    function updateCircleNumber(circle) {
-        document.getElementById('circleNumber').textContent = circle;
-        currentCircle = circle;
-        let containerNumber = document.getElementById('containerNumber').innerHTML;
-
-        let currLocation = document.getElementById('currLocation').innerHTML;
-        let currDate = document.getElementById('currDate').innerHTML;
-
-        if (currentCircle < maxCircle){
-            document.getElementById('Location').textContent = 'Пройдено';
-            document.getElementById('Date').textContent = '';
-        }
-        else {
-            document.getElementById('Location').textContent = currLocation;
-            document.getElementById('Date').textContent = currDate;
-        }
-
-        document.getElementById('containerNumber').textContent = containerNumber;
-
-        checkButtonsState();
-    }
-
-    function checkButtonsState() {
-        if (currentCircle === 1) {
-            document.getElementById('prevCircleButton').disabled = true;
-            document.getElementById('nextCircleButton').disabled = currentCircle === maxCircle;
-        } else {
-            document.getElementById('prevCircleButton').disabled = false;
-            document.getElementById('nextCircleButton').disabled = currentCircle >= maxCircle;
-        }
-    }
-</script>
 <script>
     $(document).ready(function() {
         function checkFields() {
