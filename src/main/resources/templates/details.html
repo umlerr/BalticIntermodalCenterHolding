@@ -47,7 +47,7 @@
         top: 325px;
     }
 
-    .SubPoints {
+    .SubPoints1, .SubPoints2 {
         width: 52.86px;
         height: 52.86px;
         background: #D9D9D9;
@@ -114,6 +114,12 @@
         font-size: 18px;
         margin-left: 10px;
     }
+
+    .non-clickable {
+        pointer-events: none;
+        color: grey;
+        cursor: default;
+    }
 </style>
 
 <div class="MacbookAir1" style="width: 1280px; height: 832px; position: relative; background: white">
@@ -128,7 +134,35 @@
     </div>
 
     <div class="Rectangle3" style="width: 1027px; height: 625.69px; left: 126px; top: 158px; position: absolute; background: #EFEFEF; box-shadow: 2.1575629711151123px 2.1575629711151123px 4.315125942230225px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
-    <div class="Rectangle4" style="width: 925px; height: 541px; left: 177px; top: 200px; position: absolute; background: #979797; border-radius: 21.58px"></div>
+    <div class="Rectangle4" style="width: 925px; height: 541px; left: 177px; top: 200px; position: absolute; background: #979797; border-radius: 21.58px">
+        <div th:if="${circle.getDeparture() != null}" style="left: 400.01px; top: 220px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
+            <span th:if="${circle.getDeparture().getAnnex() != null}"
+                  th:text="'Номер приложения: ' + ${circle.getDeparture().getAnnex()}"></span>
+            <span th:if="${circle.getDeparture().getAnnex() == null}"
+                  th:text="' '"> </span>
+        </div>
+
+        <div th:if="${circle.getDeparture() != null}" style="left: 700px; top: 220px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
+            <span th:if="${circle.getDeparture().getCompensation() != null}"
+                  th:text="'Компенсация: ' + ${circle.getDeparture().getCompensation()} + '$'"></span>
+            <span th:if="${circle.getDeparture().getCompensation() == null}"
+                  th:text="' '"> </span>
+        </div>
+
+        <div th:if="${circle.getArrival() != null}" style="left: 400.01px; top: 400px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
+            <span th:if="${circle.getArrival().getDamage_Repair()!= null}"
+                  th:text="'Дефект и решение по ремонту: ' + ${circle.getArrival().getDamage_Repair()}"></span>
+            <span th:if="${circle.getArrival().getDamage_Repair() == null}"
+                  th:text="' '"> </span>
+        </div>
+
+        <div th:if="${circle.getArrival() != null}" style="left: 800px; top: 400px; position: absolute; color: black; font-size: 18px; font-family: Montserrat,serif; font-weight: 400; word-wrap: break-word">
+            <span th:if="${circle.getArrival().getUsed_Days() != null}"
+                  th:text="'Количество дней: ' + ${circle.getArrival().getUsed_Days()}"></span>
+            <span th:if="${circle.getArrival().getUsed_Days() == null}"
+                  th:text="' '"> </span>
+        </div>
+    </div>
 
     <div class="ellipse-container">
         <div class="EndPoints">
@@ -142,33 +176,68 @@
         <span id="pickup_date"  style="display: none;" th:text="${circle.getDeparture().getPickup_Date()}"></span>
         <span id="delivery_location"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Location()}"></span>
 
-        <div class="SubPoints" onclick="toggleSubList(this)">
+        <div class="SubPoints1" onclick="toggleSubList(this)">
             <div class="label">Отправка</div>
             <div class="line" id="line2"></div>
         </div>
 
-        <div class="sub-list">
+
+        <div class="sub-list" th:if="${circle.getDeparture() != null}" style="display: none;">
             <div class="sub-ellipse">
-                <div class="sub-label" ></div>
+                <div class="sub-label">
+
+                    <span class="china-location" th:if="${circle.getDeparture().getChina_Location() != null}"
+                          th:text="${circle.getDeparture().getChina_Location()}"> </span>
+                    <span class="china-location" th:if="${circle.getDeparture().getChina_Location() == null}" th:text="'-'"> </span>
+                    <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() != null}"
+                          th:text="${circle.getDeparture().getDelivery_Date()}"> </span>
+                    <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() == null}" th:text="'-'"> </span>
+
+                </div>
             </div>
             <div class="sub-ellipse">
-                <div class="sub-label" th:text="${container.getNumber()}"></div>
+                <div class="sub-label">
+                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() != null}"
+                              th:text="${circle.getDeparture().getDelivery_Location()}"> </span>
+                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() == null}"
+                              th:text="'-'"> </span>
+                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() != null}"
+                              th:text="${circle.getDeparture().getPickup_Date()}"> </span>
+                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() == null}"
+                              th:text="'-'"> </span>
+                </div>
             </div>
-            <!-- Добавьте больше подпунктов по мере необходимости -->
         </div>
 
-        <div class="SubPoints" onclick="toggleSubList(this)">
+        <div class="SubPoints2" onclick="toggleSubList(this)">
             <div class="label">Прибытие</div>
             <div class="line" id="line3"></div>
         </div>
-        <div class="sub-list">
+
+        <div class="sub-list" th:if="${circle.getArrival() != null}" style="display: none;">
             <div class="sub-ellipse">
-                <div class="sub-label" ></div>
+
+                    <span class="stock" th:if="${circle.getArrival().getStock() != null}"
+                          th:text="${circle.getArrival().getStock()}"> </span>
+                    <span class="stock" th:if="${circle.getArrival().getStock() == null}"
+                          th:text="'-'"> </span>
+                    <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() != null}"
+                          th:text="${circle.getArrival().getRussia_Delivery_Date()}"> </span>
+                    <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() == null}"
+                          th:text="'-'"> </span>
             </div>
             <div class="sub-ellipse">
-                <div class="sub-label" ></div>
+                    <span class="direction" th:if="${circle.getArrival().getDirection() != null}"
+                          th:text="${circle.getArrival().getDirection()}"> </span>
+                    <span class="direction" th:if="${circle.getArrival().getDirection() == null}"
+                          th:text="'-'"> </span>
+
+                    <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() != null}"
+                          th:text="${circle.getArrival().getCheckpoint_Date()}"> </span>
+                    <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() == null}"
+                          th:text="'-'"> </span>
+
             </div>
-            <!-- Добавьте больше подпунктов по мере необходимости -->
         </div>
 
         <div class="EndPoints">
@@ -197,41 +266,17 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var flag = false;
-
-        function checkFields() {
-            $.each(data, function(key, value) {
-                var subLabel = $("<div>").addClass("sub-label");
-
-                if (value === "") {
-                    subLabel.text("Пустое значение");
-                    flag = true;
-                } else {
-                    subLabel.text(value);
-                }
-
-                $(".sub-list").append(
-                    $("<div>").addClass("sub-ellipse").append(subLabel)
-                );
-            });
-            console.log("Flag: ", flag);
-        }
-        checkFields();
-    });
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#prevCircleButton").click(function() {
-            var circleNumber = parseInt($("#circleNumber").text());
+            const circleNumber = parseInt($("#circleNumber").text());
             redirectToDetailsPage(circleNumber - 1, "prev");
         });
 
         $("#nextCircleButton").click(function() {
-            var circleNumber = parseInt($("#circleNumber").text());
+            const circleNumber = parseInt($("#circleNumber").text());
             redirectToDetailsPage(circleNumber + 1, "next");
         });
 
@@ -282,25 +327,60 @@
     }
 </script>
 <script>
-    function toggleSubList(element) {
-        const subList = $(element).next();
-        const rect3 = $('.Rectangle3');
-        const rect4 = $('.Rectangle4');
-        const subListHeight = subList.outerHeight(true);
-        const line = $(element).find('.line'); // Находим линию внутри элемента
+    $(document).ready(function() {
+        function checkFields() {
+            $('.sub-list').each(function() {
+                let subList = $(this);
+                let chinaLocation = subList.find('.china-location').text().trim();
+                let deliveryDate = subList.find('.delivery-date').text().trim();
+                let deliveryLocation = subList.find('.delivery-location').text().trim();
+                let pickupDate = subList.find('.pickup-date').text().trim();
 
-        if (subList.is(':hidden')) {
-            subList.show();
-            rect3.css('height', parseInt(rect3.height()) + subListHeight + 'px');
-            rect4.css('height', parseInt(rect4.height()) + subListHeight + 'px');
-            line.css('height', parseInt(line.height()) + subListHeight + 'px');
-        } else {
-            subList.hide();
-            rect3.css('height', parseInt(rect3.height()) - subListHeight - 20 + 'px');
-            rect4.css('height', parseInt(rect4.height()) - subListHeight - 20 + 'px');
-            line.css('height', parseInt(line.height()) - subListHeight - 20 + 'px');
+                if (chinaLocation === "-" && deliveryDate === "-" && deliveryLocation === "-" && pickupDate === "-")
+                    subList.prev('.SubPoints1').addClass('non-clickable');
+                else
+                    subList.prev('.SubPoints1').removeClass('non-clickable');
+
+                let stock = subList.find('.stock').text().trim();
+                let russiaDeliveryDate = subList.find('.russia-delivery-date').text().trim();
+                let direction = subList.find('.direction').text().trim();
+                let checkpointDate = subList.find('.checkpoint-date').text().trim();
+
+                if (stock === "-" && russiaDeliveryDate === "-" && direction === "-" && checkpointDate === "-")
+                    subList.prev('.SubPoints2').addClass('non-clickable');
+                else
+                    subList.prev('.SubPoints2').removeClass('non-clickable');
+            });
         }
-    }
+
+        checkFields();
+
+        function toggleSubList(element) {
+            const subList = $(element).next('.sub-list');
+            if ($(element).hasClass('non-clickable')) {
+                return;
+            }
+
+            const rect3 = $('.Rectangle3');
+            const rect4 = $('.Rectangle4');
+            const line = $(element).find('.line');
+            const subListHeight = subList.outerHeight(true);
+
+            if (subList.is(':hidden')) {
+                subList.show();
+                rect3.css('height', parseInt(rect3.height()) + subListHeight + 'px');
+                rect4.css('height', parseInt(rect4.height()) + subListHeight + 'px');
+                line.css('height', parseInt(line.height()) + subListHeight + 'px');
+            } else {
+                subList.hide();
+                rect3.css('height', parseInt(rect3.height()) - subListHeight - 20 + 'px');
+                rect4.css('height', parseInt(rect4.height()) - subListHeight - 20 + 'px');
+                line.css('height', parseInt(line.height()) - subListHeight - 20 + 'px');
+            }
+        }
+
+        window.toggleSubList = toggleSubList;
+    });
 </script>
 
 </html>

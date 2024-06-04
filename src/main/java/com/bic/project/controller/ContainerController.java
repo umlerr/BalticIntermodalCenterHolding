@@ -49,10 +49,8 @@ public class ContainerController {
 
         if(containerOptional.isPresent()) {
             Container container = containerOptional.get();
-            System.out.println(container.getId());
             model.addAttribute("container", container);
             Circle circle = container.getCircleByNumber(circle_number);
-            System.out.println(circle.getNumber());
             model.addAttribute("circle", circle);
             return "details";
         }
