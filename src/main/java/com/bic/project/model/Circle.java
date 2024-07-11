@@ -18,9 +18,9 @@ import java.util.List;
 public class Circle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
-    private Integer Number;
+    private Integer number;
 
     @ManyToOne
     @JoinColumn(name = "CONTAINER_ID")

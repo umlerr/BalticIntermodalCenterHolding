@@ -15,21 +15,19 @@ import java.sql.Date;
 public class Departure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
-    private Date Date;
+    private Date deliveryDate;
 
-    private Date Delivery_Date;
+    private String chinaLocation;
 
-    private String China_Location;
+    private Date pickupDate;
 
-    private Date Pickup_Date;
+    private String deliveryLocation;
 
-    private String Delivery_Location;
+    private String annex;
 
-    private String Annex;
-
-    private Integer Compensation;
+    private Integer compensation;
 
     @OneToOne
     @JoinColumn(name = "CIRCLE_ID")
