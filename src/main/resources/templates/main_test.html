@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 
+<link rel="stylesheet" href="/css/add.css">
+<link rel="stylesheet" href="/css/tablestyle.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -21,17 +24,16 @@
             <div style="left: 35px; top: 10px; position: absolute; text-align: center; color: #CFDBD5; font-size: 15.26px; font-family: Montserrat; font-weight: 300; text-transform: uppercase; letter-spacing: 2.90px; word-wrap: break-word">АДМИН</div>
         </div>
         <div class="User12345" style="left: 585px; top: 39px; position: absolute; text-align: center; color: #E8EDDF; font-size: 20.05px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">User_12345</div>
-        <img class="Image2" style="width: 110px; height: 69px; left: 126px; top: 17px; position: absolute" src="https://via.placeholder.com/110x69" />
+        <img class="Image2" style="width: 110px; height: 69px; left: 126px; top: 17px; position: absolute" src="https://bic.net.ru/wp-content/themes/bic/assets/img/whlogo.png" />
     </div>
     <div class="Group20" style="width: 1027px; height: 610px; position: relative">
         <div class="Rectangle3" style="width: 1027px; height: 610px; left: 0px; top: 0px; position: absolute; background: #E8EDDF; box-shadow: 10px 10px 12.100000381469727px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
         <div class="Group19" style="width: 925px; height: 527px; left: 51px; top: 41px; position: absolute">
             <div class="Rectangle4" style="width: 925px; height: 527px; left: 0px; top: 0px; position: absolute; background: #333533; box-shadow: 3px 3px 10.399999618530273px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
             <div class="Line1" style="width: 831.97px; height: 0px; left: 47px; top: 108px; position: absolute; border: 3px #E8EDDF dotted"></div>
-            <div class="Search" style="width: 449px; height: 42px; left: 47px; top: 32px; position: absolute; background: #F5CB5C; border-radius: 25px">
-                <label for="searchInput"></label> <input type="text" id="searchInput" placeholder="Поиск по имени...">
+            <div class="Search">
+                <label for="searchInput"></label> <input type="text" id="searchInput" style="width: 449px; height: 42px; left: 47px; top: 32px; position: absolute; background: #F5CB5C; border-radius: 25px" placeholder="Поиск">
             </div>
-            <div style="left: 65px; top: 41px; position: absolute; color: #333533; font-size: 20px;  font-weight: 500; word-wrap: break-word">Поиск</div>
             <button id="openModalButton" style="width: 112px; height: 44px; left: 767px; top: 31px; position: absolute; background: #E8EDDF; border-radius: 25px"></button>
             <div style="left: 779px; top: 44px; position: absolute; color: #333533; font-size: 14px;  font-weight: 600; text-transform: uppercase; letter-spacing: 0.28px; word-wrap: break-word">Добавить</div>
             <button id="deleteButton" style="width: 111px; height: 44px; left: 640px; top: 31px; position: absolute; background: #E8EDDF; border-radius: 25px"></button>
@@ -49,12 +51,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="container: ${containers}" th:data-id="${container.getId()} " th:number="${container.getMaxCircle()}">
+                <tr th:each="container: ${containers}" th:data-id="${container.getId()} " th:number="${maxCircleMap[container.getId()]}">
                     <td th:text="${container.getNumber()}"></td>
                     <td th:text="${container.getPrice()}"></td>
                     <td th:text="${container.getType()}"></td>
-                    <td th:text="${container.getMaxCircle()}"></td>
-                    <td th:text="${container.getCurrentLocation()}"></td>
+                    <td th:text="${maxCircleMap[container.getId()]}"></td>
+                    <td th:text="${locationMap[container.getId()]}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -63,7 +65,9 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <label for="nameInput"></label><input type="text" id="nameInput" placeholder="Введите имя">
+            <label for="numberInput"></label><input type="text" id="numberInput" placeholder="Введите number">
+            <label for="priceInput"></label><input type="text" id="priceInput" placeholder="Введите price">
+            <label for="typeInput"></label><input type="text" id="typeInput" placeholder="Введите type">
             <button id="addButton" class="btn btn-primary mb-2">Добавить</button>
         </div>
     </div>
@@ -85,9 +89,9 @@
 <script>
     $(document).ready(function() {
         $("tr").dblclick(function() {
-            var id = $(this).attr("data-id");
-            var number = $(this).attr("number")
-            window.location.href = "/details/" + id + "/" + number; //+ "/" + number;
+            const id = $(this).attr("data-id");
+            const number = $(this).attr("number");
+            window.location.href = "/details/" + id + "/" + number;
         });
     });
 </script>

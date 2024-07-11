@@ -30,7 +30,6 @@ $(document).ready(function() {
         const newName = $('#nameInputEdit').val();
         const id = $('.selected').data('id');
 
-        // Отправляем данные на сервер
         $.ajax({
             url: '/update-row',
             type: 'POST',
@@ -40,15 +39,13 @@ $(document).ready(function() {
                 name: newName
             })
         })
-            .done(function(response) {
-                // Обработка успешного ответа
+            .done(function() {
                 const selectedRow = $('.selected');
                 selectedRow.find('.name').text(newName);
                 $('#editModal').css('display', 'none');
                 location.reload();
             })
             .fail(function(xhr, status, error) {
-                // Обработка ошибки
                 console.error('Ошибка удаления. Попробуйте еще раз.');
                 console.log(xhr, status, error);
             });

@@ -6,11 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 @Data
@@ -32,5 +29,11 @@ public class Container {
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Circle> circleList = new ArrayList<>();
+
+    public Container(String number, Integer price, String type) {
+        this.number = number;
+        this.price = price;
+        this.type = type;
+    }
 }
 

@@ -4,24 +4,22 @@ $(document).ready(function() {
     });
 
     $('#addButton').on('click', function() {
-        const name = $('#nameInput').val();
+        const type = $('#typeInput').val();
+        const num = $('#numberInput').val();
+        const price = parseInt($('#priceInput').val());
 
-        if (name.trim() === '') {
-            alert('Пожалуйста, введите имя');
+        if (type.trim() === '' || num.trim() === '' || isNaN(price)) {
+            alert('Пожалуйста, заполните все поля корректно.');
             return;
         }
+
         $.ajax({
             url: '/add-data',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ name: name }),
+            data: JSON.stringify({number: num, price: price, type: type}),
         }).done(function() {
-            setTimeout(function(){
-                alert('Данные успешно добавлены');
-            }, 0);
-            setTimeout(function(){
-                document.querySelector('.alert').style.display = 'none';
-            }, 2000);
+            alert('Данные успешно добавлены');
             $('#modal').hide();
             location.reload();
         }).fail(function() {

@@ -1,7 +1,6 @@
 package com.bic.project.repository;
 
 import com.bic.project.model.Arrival;
-import com.bic.project.model.Circle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +28,6 @@ public interface ArrivalRepository extends JpaRepository<Arrival, String> {
             "or lower(c.field3) like %:keyword% ")
      */
 
-    @Query("select c from Arrival c where lower(c.Stock) like %:keyword% ")
+    @Query("select c from Arrival c where lower(c.stock) like %:keyword% ")
     List<Arrival> searchByKeyword(@Param("keyword") String keyword);
 }

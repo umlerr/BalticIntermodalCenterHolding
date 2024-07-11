@@ -3,7 +3,6 @@ package com.bic.project.controller;
 
 import com.bic.project.model.Circle;
 import com.bic.project.model.Container;
-import com.bic.project.service.CircleService;
 import com.bic.project.service.ContainerService;
 import com.bic.project.utils.ContainerUtils;
 import lombok.AllArgsConstructor;
@@ -71,14 +70,14 @@ public class ContainerController {
     }
     @PostMapping("/add-data")
     @ResponseBody
-    public void addData(@RequestBody Container container) {
-        containerService.add(container);
+    public void addData(@RequestBody String number, Integer price, String type) {
+        containerService.add(new Container(number, price, type));
     }
 
     @PostMapping("/update-row")
     @ResponseBody
-    public void updateData(@RequestBody Container container) {
-        containerService.updateOrInsert(container);
+    public void updateData(@RequestBody String number, Integer price, String type) {
+        containerService.updateOrInsert(new Container(number, price, type));
     }
 
     @GetMapping("/search")

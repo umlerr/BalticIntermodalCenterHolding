@@ -52,14 +52,14 @@
         <div class="Rectangle3" style="transition: height 0.3s; width: 1027px; height: 610px; left: 0px; top: 0px; position: absolute; background: #E8EDDF; box-shadow: 10px 10px 12.100000381469727px rgba(0, 0, 0, 0.25); border-radius: 21.58px"></div>
         <div class="Group14" style="width: 925px; height: 527px; left: 51px; top: 41px; position: absolute">
 
-            <span id="delivery_date"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Date()}"></span>
-            <span id="china_location"  style="display: none;" th:text="${circle.getDeparture().getChina_Location()}"></span>
-            <span id="pickup_date"  style="display: none;" th:text="${circle.getDeparture().getPickup_Date()}"></span>
-            <span id="delivery_location"  style="display: none;" th:text="${circle.getDeparture().getDelivery_Location()}"></span>
+            <span id="delivery_date"  style="display: none;" th:text="${circle.getDeparture().getDeliveryDate()}"></span>
+            <span id="china_location"  style="display: none;" th:text="${circle.getDeparture().getChinaLocation()}"></span>
+            <span id="pickup_date"  style="display: none;" th:text="${circle.getDeparture().getPickupDate()}"></span>
+            <span id="delivery_location"  style="display: none;" th:text="${circle.getDeparture().getDeliveryLocation()}"></span>
 
-            <span id="currLocation" style="display: none;" th:text="${container.getCurrentLocation()}"></span>
-            <span id="currDate" style="display: none;" th:text="${container.getCurrentDate()}"></span>
-            <span id="maxCircle"  style="display: none;" th:text="${container.getMaxCircle()}"></span>
+            <span id="currLocation" style="display: none;" th:text="${containerUtils.getCurrentLocation(container)}"></span>
+            <span id="currDate" style="display: none;" th:text="${containerUtils.getCurrentDate(container)}"></span>
+            <span id="maxCircle"  style="display: none;" th:text="${containerUtils.getMaxCircle(container)}"></span>
             <span id="currCircle"  style="display: none;" th:text="${circle.getNumber()}"></span>
             <span id="containerId"  style="display: none;" th:text="${container.getId()}"></span>
 
@@ -81,18 +81,18 @@
             <div class="Group9" style="width: 312px; height: 42px; left: 294px; top: 169px; position: absolute">
                 <div class="Rectangle13" style="width: 312px; height: 42px; left: 0px; top: 0px; position: absolute; background: #F5CB5C; border-radius: 25px"></div>
                 <div th:if="${circle.getDeparture() != null}" style="left: 55px; top: 9px; position: absolute; color: #333533; font-size: 20px;   font-weight: 500; word-wrap: break-word">
-                    <span th:if="${circle.getDeparture().getChina_Location() != null}"
-                          th:text="${circle.getDeparture().getChina_Location()}"></span>
-                    <span th:if="${circle.getDeparture().getChina_Location() == null}"
+                    <span th:if="${circle.getDeparture().getChinaLocation() != null}"
+                          th:text="${circle.getDeparture().getChinaLocation()}"></span>
+                    <span th:if="${circle.getDeparture().getChinaLocation() == null}"
                           th:text="' '"> </span>
                 </div>
             </div>
             <div class="Group52" style="width: 315px; height: 42px; left: 564px; top: 169px; position: absolute">
                 <div class="Rectangle14" style="width: 315px; height: 42px; left: 0px; top: 0px; position: absolute; background: #E8EDDF; border-radius: 25px"></div>
                 <div th:if="${circle.getDeparture() != null}" style="left: 57px; top: 9px; position: absolute; color: #333533; font-size: 20px;   font-weight: 500; word-wrap: break-word">
-                    <span th:if="${circle.getDeparture().getDelivery_Date() != null}"
-                          th:text="${circle.getDeparture().getDelivery_Date()} "></span>
-                    <span th:if="${circle.getDeparture().getDelivery_Date() == null}"
+                    <span th:if="${circle.getDeparture().getDeliveryDate() != null}"
+                          th:text="${circle.getDeparture().getDeliveryDate()} "></span>
+                    <span th:if="${circle.getDeparture().getDeliveryDate() == null}"
                           th:text="' '"> </span>
                 </div>
             </div>
@@ -113,9 +113,9 @@
             <div class="Group142" style="width: 315px; height: 42px; left: 564px; top: 409px; position: absolute">
                 <div class="Rectangle15" style="width: 315px; height: 42px; left: 0px; top: 0px; position: absolute; background: #E8EDDF; border-radius: 25px"></div>
                 <div th:if="${circle.getArrival() != null}" style="left: 57px; top: 8px; position: absolute; color: #333533; font-size: 20px;   font-weight: 500; word-wrap: break-word">
-                    <span th:if="${circle.getArrival().getCheckpoint_Date != null}"
-                          th:text="${circle.getArrival().getCheckpoint_Date}"></span>
-                    <span th:if="${circle.getArrival().getCheckpoint_Date == null}"
+                    <span th:if="${circle.getArrival().getCheckpointDate() != null}"
+                          th:text="${circle.getArrival().getCheckpointDate()}"></span>
+                    <span th:if="${circle.getArrival().getCheckpointDate() == null}"
                           th:text="' '"> </span>
                 </div>
             </div>
@@ -124,21 +124,21 @@
                 <div class="SubPoints1" onclick="toggleSubList(this)" style="cursor: pointer; width: 74px; height: 42px; left: 0px; top: 0px; position: absolute; background: #F5CB5C; border-radius: 25px"></div>
                 <div class="sub-list" th:if="${circle.getDeparture() != null}" style="display: none;">
                     <div class="sub-points">
-                    <span class="china-location" th:if="${circle.getDeparture().getChina_Location() != null}"
-                          th:text="${circle.getDeparture().getChina_Location()}"> </span>
-                        <span class="china-location" th:if="${circle.getDeparture().getChina_Location() == null}" th:text="'-'"> </span>
-                        <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() != null}"
-                              th:text="${circle.getDeparture().getDelivery_Date()}"> </span>
-                        <span class="delivery-date" th:if="${circle.getDeparture().getDelivery_Date() == null}" th:text="'-'"> </span>
+                    <span class="china-location" th:if="${circle.getDeparture().getChinaLocation() != null}"
+                          th:text="${circle.getDeparture().getChinaLocation()}"> </span>
+                        <span class="china-location" th:if="${circle.getDeparture().getChinaLocation() == null}" th:text="'-'"> </span>
+                        <span class="delivery-date" th:if="${circle.getDeparture().getDeliveryDate() != null}"
+                              th:text="${circle.getDeparture().getDeliveryDate()}"> </span>
+                        <span class="delivery-date" th:if="${circle.getDeparture().getDeliveryDate() == null}" th:text="'-'"> </span>
                     </div>
                     <div class="sub-points">
-                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() != null}"
-                              th:text="${circle.getDeparture().getDelivery_Location()}"> </span>
-                        <span class="delivery-location" th:if="${circle.getDeparture().getDelivery_Location() == null}"
+                        <span class="delivery-location" th:if="${circle.getDeparture().getDeliveryLocation() != null}"
+                              th:text="${circle.getDeparture().getDeliveryLocation()}"> </span>
+                        <span class="delivery-location" th:if="${circle.getDeparture().getDeliveryLocation() == null}"
                               th:text="'-'"> </span>
-                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() != null}"
-                              th:text="${circle.getDeparture().getPickup_Date()}"> </span>
-                        <span class="pickup-date" th:if="${circle.getDeparture().getPickup_Date() == null}"
+                        <span class="pickup-date" th:if="${circle.getDeparture().getPickupDate() != null}"
+                              th:text="${circle.getDeparture().getPickupDate()}"> </span>
+                        <span class="pickup-date" th:if="${circle.getDeparture().getPickupDate() == null}"
                               th:text="'-'"> </span>
                     </div>
                 </div>
@@ -173,9 +173,9 @@
                           th:text="${circle.getArrival().getStock()}"> </span>
                         <span class="stock" th:if="${circle.getArrival().getStock() == null}"
                               th:text="'-'"> </span>
-                        <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() != null}"
-                              th:text="${circle.getArrival().getRussia_Delivery_Date()}"> </span>
-                        <span class="russia-delivery-date" th:if="${circle.getArrival().getRussia_Delivery_Date() == null}"
+                        <span class="russia-delivery-date" th:if="${circle.getArrival().getRussiaDeliveryDate() != null}"
+                              th:text="${circle.getArrival().getRussiaDeliveryDate()}"> </span>
+                        <span class="russia-delivery-date" th:if="${circle.getArrival().getRussiaDeliveryDate() == null}"
                               th:text="'-'"> </span>
                     </div>
                     <div class="sub-points">
@@ -184,9 +184,9 @@
                         <span class="direction" th:if="${circle.getArrival().getDirection() == null}"
                               th:text="'-'"> </span>
 
-                        <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() != null}"
-                              th:text="${circle.getArrival().getCheckpoint_Date()}"> </span>
-                        <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpoint_Date() == null}"
+                        <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpointDate() != null}"
+                              th:text="${circle.getArrival().getCheckpointDate()}"> </span>
+                        <span class="checkpoint-date" th:if="${circle.getArrival().getCheckpointDate() == null}"
                               th:text="'-'"> </span>
 
                     </div>
@@ -197,26 +197,26 @@
             <div class="Group11" style="width: 312px; height: 42px; left: 294px; top: 329px; position: absolute">
                 <div class="Rectangle16" style="width: 312px; height: 42px; left: 0px; top: 0px; position: absolute; background: #F5CB5C; border-radius: 25px"></div>
                 <div th:if="${circle.getArrival() != null}" style="left: 55px; top: 8px; position: absolute; color: #333533; font-size: 20px;   font-weight: 500; word-wrap: break-word">
-                    <span th:if="${circle.getArrival().getDamage_Repair()!= null}"
-                            th:text="'Дефект: ???' + ${circle.getArrival().getDamage_Repair()}"></span>
-                    <span th:if="${circle.getArrival().getDamage_Repair() == null}"
+                    <span th:if="${circle.getArrival().getDamageRepair()!= null}"
+                            th:text="'Дефект: ???' + ${circle.getArrival().getDamageRepair()}"></span>
+                    <span th:if="${circle.getArrival().getDamageRepair() == null}"
                             th:text="' '"> </span>
                 </div>
             </div>
             <div class="Group12" style="width: 315px; height: 42px; left: 564px; top: 329px; position: absolute">
                 <div class="Rectangle15" style="width: 315px; height: 42px; left: 0px; top: 0px; position: absolute; background: #E8EDDF; border-radius: 25px"></div>
                 <div th:if="${circle.getArrival() != null}" style="left: 57px; top: 8px; position: absolute; color: #333533; font-size: 20px;   font-weight: 500; word-wrap: break-word">
-                    <span th:if="${circle.getArrival().getUsed_Days() != null}"
-                            th:text="'Количество дней: ' + ${circle.getArrival().getUsed_Days()}"></span>
-                    <span th:if="${circle.getArrival().getUsed_Days() == null}"
+                    <span th:if="${circle.getArrival().getUsedDays() != null}"
+                            th:text="'Количество дней: ' + ${circle.getArrival().getUsedDays()}"></span>
+                    <span th:if="${circle.getArrival().getUsedDays() == null}"
                             th:text="' '"> </span>
                 </div>
             </div>
             <div class="Group2" style="width: 193px; height: 35px; left: 686px; top: 38px; position: absolute">
-                <div style="left: 37.85px; top: 0px; position: absolute; color: #E8EDDF; font-size: 28.05px;   font-weight: 400; letter-spacing: 0.56px; word-wrap: break-word">Круг </div>
-                <button id="prevCircleButton" onclick="goToPreviousCircle()" class="Vector" style="cursor: pointer; width: 24px; height: 20px; top: 7px; position: absolute; background: #F5CB5C"> < </button>
+                <div style="left: 37.85px; top: 0; position: absolute; color: #E8EDDF; font-size: 28.05px;   font-weight: 400; letter-spacing: 0.56px; word-wrap: break-word">Круг </div>
+                <button id="prevCircleButton" class="Vector" style="cursor: pointer; width: 24px; height: 20px; top: 7px; position: absolute; background: #F5CB5C"> < </button>
                 <div id="circleNumber" style="left: 121px; top: 1px; position: absolute; color: #E8EDDF; font-size: 28.05px;   font-weight: 500; letter-spacing: 1.12px; word-wrap: break-word"></div>
-                <button id="nextCircleButton" onclick="goToNextCircle()" class="Vector" style="cursor: pointer; width: 24px; height: 21px; left: 169px; top: 7px; position: absolute; background: #F5CB5C"> > </button>
+                <button id="nextCircleButton" class="Vector" style="cursor: pointer; width: 24px; height: 21px; left: 169px; top: 7px; position: absolute; background: #F5CB5C"> > </button>
             </div>
 
 

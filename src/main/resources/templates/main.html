@@ -67,14 +67,16 @@
 <script src="/js/delete.js"></script>
 <script src="/js/edit.js"></script>
 <script src="/js/search.js"></script>
+
 <script>
     $(document).ready(function() {
         $("tr").dblclick(function() {
-            var id = $(this).attr("data-id");
-            var number = $(this).attr("number")
-            window.location.href = "/details/" + id + "/" + number; //+ "/" + number;
+            const id = $(this).attr("data-id");
+            const number = $(this).attr("number");
+            window.location.href = "/details/" + id + "/" + number;
         });
     });
 </script>
+
 </body>
 </html>
