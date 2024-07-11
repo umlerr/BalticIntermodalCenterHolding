@@ -1,29 +1,4 @@
 $(document).ready(function() {
-    let isCtrlPressed = false;
-
-    $(document).keydown(function(event) {
-        if (event.which === 17) { // Клавиша Ctrl
-            isCtrlPressed = true;
-        }
-    }).keyup(function(event) {
-        if (event.which === 17) {
-            isCtrlPressed = false;
-        }
-    });
-
-    $('tr').click(function(event) {
-        if (!$(this).is(':first-child')) {
-            if (isCtrlPressed) {
-                $(this).toggleClass('selected');
-            } else {
-                if (!event.shiftKey) {
-                    $('.selected').removeClass('selected');
-                }
-                $(this).addClass('selected');
-            }
-        }
-    });
-
     $('#deleteButton').click(function() {
         const selectedRows = $('.selected');
 
