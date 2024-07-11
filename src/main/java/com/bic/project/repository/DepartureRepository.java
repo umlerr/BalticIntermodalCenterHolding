@@ -29,6 +29,6 @@ public interface DepartureRepository extends JpaRepository<Departure, String> {
             "or lower(c.field3) like %:keyword% ")
      */
 
-    @Query("select c from Departure c where lower(c.China_Location) like %:keyword% ")
+    @Query("select c from Departure c where lower(c.chinaLocation) like %:keyword% ")
     List<Departure> searchByKeyword(@Param("keyword") String keyword);
 }

@@ -5,6 +5,7 @@ import com.bic.project.model.Circle;
 import com.bic.project.model.Container;
 import com.bic.project.service.CircleService;
 import com.bic.project.service.ContainerService;
+import com.bic.project.utils.ContainerUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -21,27 +24,26 @@ import java.util.Optional;
 public class ContainerController {
 
     private ContainerService containerService;
-    private CircleService circleService;
+    private ContainerUtils containerUtils;
 
     @GetMapping("/")
     public String getAll(Model model) {
-        Iterable<Container> taskList = containerService.getAll();
-        model.addAttribute("containers", taskList);
+        Iterable<Container> containerList = containerService.getAll();
+
+        Map<Integer, String> currentLocationMap = new HashMap<>();
+        Map<Integer, Integer> maxCircleMap = new HashMap<>();
+
+        for (Container container : containerList) {
+            currentLocationMap.put(container.getId(), ContainerUtils.getCurrentLocation(container));
+            maxCircleMap.put(container.getId(), ContainerUtils.getMaxCircle(container));
+        }
+
+        model.addAttribute("containers", containerList);
+        model.addAttribute("locationMap", currentLocationMap);
+        model.addAttribute("maxCircleMap", maxCircleMap);
+
         return "main_test";
     }
-
-//    @GetMapping("/details/{id}")
-//    public String getCurrContainer(@PathVariable Integer id, Model model) {
-//        Optional<Container> containerOptional = containerService.getById(id);
-//
-//        if(containerOptional.isPresent()) {
-//            Container container = containerOptional.get();
-//            model.addAttribute("container", container);
-//            return "details";
-//        } else {
-//            return "redirect:/";
-//        }
-//    }
 
     @GetMapping("/details/{id}/{circle_number}")
     public String getCurrCircle(@PathVariable Integer id, @PathVariable Integer circle_number, Model model) {
@@ -49,9 +51,12 @@ public class ContainerController {
 
         if(containerOptional.isPresent()) {
             Container container = containerOptional.get();
+            Circle circle = ContainerUtils.getCircleByNumber(container, circle_number);
+
             model.addAttribute("container", container);
-            Circle circle = container.getCircleByNumber(circle_number);
             model.addAttribute("circle", circle);
+            model.addAttribute("containerUtils", containerUtils);
+
             return "test";
         }
         return "redirect:/";

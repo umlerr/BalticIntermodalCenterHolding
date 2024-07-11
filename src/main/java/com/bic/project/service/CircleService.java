@@ -32,9 +32,10 @@ public class CircleService {
         circleRepository.updateOrInsert(circle);
     }
 
-//    public Iterable<Circle> searchByKeyword(String keyword) {
-//        return circleRepository.searchByKeyword(keyword);
-//    }
+    public Iterable<Circle> getByContainer(Container container) {
+        return circleRepository.findAll();
+    }
+
     public Optional<Circle> getById(Integer id) {
         return circleRepository.findById(String.valueOf(id));
     }

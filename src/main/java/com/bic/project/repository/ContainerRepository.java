@@ -30,6 +30,6 @@ public interface ContainerRepository extends CrudRepository<Container, String> {
             "or lower(c.field3) like %:keyword% ")
      */
 
-    @Query("select c from Container c where lower(c.Number) like %:keyword% ")
+    @Query("select c from Container c where lower(c.number) like %:keyword% ")
     List<Container> searchByKeyword(@Param("keyword") String keyword);
 }
