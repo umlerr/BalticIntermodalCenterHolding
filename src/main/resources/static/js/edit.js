@@ -14,10 +14,16 @@ $(document).ready(function() {
             return;
         }
 
-        const name = selectedRow.find('.name').text();
-        $('#currentValue').text(name);
+        const number = selectedRow.find('.number').text();
+        const price = selectedRow.find('.price').text();
+        const type = selectedRow.find('.type').text();
+        $('#currentValueNumber').text(number);
+        $('#currentValuePrice').text(price);
+        $('#currentValueType').text(type);
 
-        $('#nameInputEdit').val(name);
+        $('#numberInputEdit').val(number);
+        $('#priceInputEdit').val(price);
+        $('#typeInputEdit').val(type);
 
         $('#editModal').css('display', 'block');
     });
@@ -27,8 +33,11 @@ $(document).ready(function() {
     });
 
     $('#saveButton').click(function() {
-        const newName = $('#nameInputEdit').val();
-        const id = $('.selected').data('id');
+        const selectedRow = $tableRows.filter('.selected');
+        const id = selectedRow.data('id');
+        const newNumber = $('#numberInputEdit').val();
+        const newPrice = $('#priceInputEdit').val();
+        const newType = $('#typeInputEdit').val();
 
         $.ajax({
             url: '/update-row',
@@ -36,17 +45,20 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify({
                 id: id,
-                name: newName
+                number: newNumber,
+                price: newPrice,
+                type: newType
             })
         })
             .done(function() {
-                const selectedRow = $('.selected');
-                selectedRow.find('.name').text(newName);
+                selectedRow.find('.number').text(newNumber);
+                selectedRow.find('.price').text(newPrice);
+                selectedRow.find('.type').text(newType);
                 $('#editModal').css('display', 'none');
                 location.reload();
             })
             .fail(function(xhr, status, error) {
-                console.error('Ошибка удаления. Попробуйте еще раз.');
+                console.error('Ошибка обновления. Попробуйте еще раз.');
                 console.log(xhr, status, error);
             });
     });

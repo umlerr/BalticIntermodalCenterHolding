@@ -1,29 +1,46 @@
 $(document).ready(function() {
-    $('#openModalButton').on('click', function() {
-        $('#modal').show();
+    $('#addButton').click(function() {
+        $('#numberInputEdit').val('');
+        $('#priceInputEdit').val('');
+        $('#typeInputEdit').val('');
+
+        $('#editModal').css('display', 'block');
     });
 
-    $('#addButton').on('click', function() {
-        const type = $('#typeInput').val();
-        const num = $('#numberInput').val();
-        const price = parseInt($('#priceInput').val());
+    $('.close').click(function() {
+        $('#editModal').css('display', 'none');
+    });
 
-        if (type.trim() === '' || num.trim() === '' || isNaN(price)) {
-            alert('Пожалуйста, заполните все поля корректно.');
-            return;
-        }
+    $('#saveButton').click(function() {
+        const newNumber = $('#numberInputEdit').val();
+        const newPrice = $('#priceInputEdit').val();
+        const newType = $('#typeInputEdit').val();
 
         $.ajax({
-            url: '/add-data',
-            method: 'POST',
+            url: '/add-row',
+            type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({number: num, price: price, type: type}),
-        }).done(function() {
-            alert('Данные успешно добавлены');
-            $('#modal').hide();
-            location.reload();
-        }).fail(function() {
-            alert('Ошибка добавления. Попробуйте еще раз.');
-        });
+            data: JSON.stringify({
+                number: newNumber,
+                price: newPrice,
+                type: newType
+            })
+        })
+            .done(function(response) {
+                const id = response.id;
+                const newRow = `
+                <tr data-id="${id}">
+                    <td class="number">${newNumber}</td>
+                    <td class="price">${newPrice}</td>
+                    <td class="type">${newType}</td>
+                </tr>
+            `;
+                $('table tbody').append(newRow);
+                $('#editModal').css('display', 'none');
+            })
+            .fail(function(xhr, status, error) {
+                console.error('Ошибка добавления. Попробуйте еще раз.');
+                console.log(xhr, status, error);
+            });
     });
 });

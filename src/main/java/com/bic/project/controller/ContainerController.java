@@ -70,14 +70,14 @@ public class ContainerController {
     }
     @PostMapping("/add-data")
     @ResponseBody
-    public void addData(@RequestBody String number, Integer price, String type) {
-        containerService.add(new Container(number, price, type));
+    public void addData(@RequestBody Container container) {
+        containerService.add(container);
     }
 
     @PostMapping("/update-row")
     @ResponseBody
-    public void updateData(@RequestBody String number, Integer price, String type) {
-        containerService.updateOrInsert(new Container(number, price, type));
+    public void updateData(@RequestBody Container container) {
+        containerService.updateOrInsert(container);
     }
 
     @GetMapping("/search")
